@@ -1,0 +1,236 @@
+#-------------------------------------------------------------
+# Kubernetes Alias Commands
+#-------------------------------------------------------------
+
+khelp() {
+    echo "------ deleting pods ------"
+    echo "krmf          Force delete pod                                -- Argument: <pod_name>"
+    echo "krmall        deletes all pods from current namespace"
+    echo "kforce        force delete all pods current namespace"
+    echo
+    echo "------ deleting errors ------"
+    echo "krmevict      delete all evicted pods   --ALL namespaces--"
+    echo "krmbackoff    delete all ImagePullBackOff pods    --ALL namespaces--"
+    echo "krmallerror   delete all ImagePullBackOff, evicted,  pods    --ALL namespaces--"
+    echo 
+    echo "------ scaling ------"
+    echo "kdropall      Scale all deployments in namespace to -0-       -- Argument: <namespace>"
+    echo "kupall        Scale all deployments in namespace to -1-       -- Argument: <namespace>"
+    echo "kdrop         Scale single app to -0-                         -- Arguments: <namespace> <deployment_name>"
+    echo "kup           Scale single app to -1-                         -- Arguments: <namespace> <deployment_name>"
+    echo 
+    echo "kgevt --------- Kube in order of time "
+    echo "------ TBC ------"
+    echo "kgimgid       Get image hash from pod                         -- Argument: <pod_name>"
+    echo "kgdt          Get docker tags from pod                        -- Arguments: <pod_name>"
+    echo "kflo          Tail logs from pod                              -- Arguments: <pod_name> <container>"
+}
+
+
+alias k='kubectl'
+alias kx='kubectx'
+alias kn='kubens'
+
+
+
+# kube Extra
+alias kgevt='kubectl get events --sort-by='.lastTimestamp''
+alias kex='kubectl exec -it'
+alias klo='k logs'
+alias kap='k apply -f'
+alias kexp='k explain'
+alias krohis='k rollout history deploy'
+alias krostat='k rollout status deploy'
+alias kroun='k rollout undo deploy'
+alias infohere="kubectl cluster-info dump > cluster-dump.txt"
+
+# kube functions
+
+# Get ImageID from pod - One argument 1) podname 
+kgimgid() {
+    POD=$(kgpo | grep ${1} | awk '{print $1}')
+    kgpoo $POD | grep imageID
+}
+# remove namespace from kgpoo line
+
+# tail logs of container - Two arguments 1) <pod_name> 2) <container_name>
+kflo() {
+    POD=$(kgpo | grep ${1} | awk '{print $1}')
+    klo -f $POD -c $2
+}
+
+
+
+# kube get 
+alias kga='k get all'
+alias kgpo='k get pods'
+alias kgdep='k get deploy'
+alias kgsec='k get secret'
+alias kgno='k get node'
+alias kgsvc='k get service'
+alias kgcm='k get configmap'
+alias kgsc='k get storageclass'
+alias kgpv='k get persistentvolume'
+alias kgpvc='k get persistentvolumeclaim'
+alias kgev='k get events'
+alias kgsa='k get serviceaccount'
+alias kgrs='k get replicaset'
+alias kging='k get ingress'
+alias kgds='k get daemonsets'
+alias kgsts='k get statefulsets'
+alias kgep='k get endpoints'
+
+# kube get yaml
+alias kgpoo='k get pods -o yaml'
+alias kgdepo='k get deploy -o yaml'
+alias kgseco='k get secret -o yaml'
+alias kgingo='k get ingress -o yaml'
+alias kgnoo='k get node -o yaml'
+alias kgsvco='k get svc -o yaml'
+alias kgcmo='k get cm -o yaml'
+alias kgsco='k get sc -o yaml'
+alias kgpvo='k get pv -o yaml'
+alias kgpvco='k get pvc -o yaml'
+alias kgsao='k get sa -o yaml'
+alias kgrso='k get rs -o yaml'
+alias kgingo='k get ing -o yaml'
+alias kgdso='k get ds -o yaml'
+alias kgepo='k get ep -o yaml'
+alias kgstso='k get sts -o yaml'
+
+# kube get wide
+alias kgpow='k get pods -o wide'
+alias kgnow='k get nodes -o wide'
+
+
+# Kube describe
+alias kdpo='k describe pod'
+alias kddep='k describe deploy'
+alias kdsec='k describe secret'
+alias kdno='k describe node'
+alias kdsvc='k describe svc'
+alias kdcm='k describe cm'
+alias kdsc='k describe sc'
+alias kdpv='k describe pv'
+alias kdpvc='k describe pvc'
+alias kdsa='k describe sa'
+alias kdrs='k describe rs'
+alias kding='k describe ing'
+alias kdds='k describe ds'
+alias kdsts='k describe sts'
+alias kdep='k describe ep'
+
+# kube delete
+alias krmpo='k delete pod'
+alias krmdep='k delete deploy'
+alias krmsvc='k delete svc'
+alias krmcm='k delete cm'
+alias krmsec='k delete secret'
+alias krmsc='k delete sc'
+alias krmpv='k delete pv'
+alias krmpvc='k delete pvc'
+alias krmsa='k delete sa'
+alias krmrs='k delete rs'
+alias krming='k delete ing'
+alias krmds='k delete ds'
+alias krmsts='k delete sts'
+alias krmep='k delete ep'
+alias krmsc='k delete sc'
+alias krmpv='k delete pv'
+alias krmpvc='k delete pvc'
+
+
+#---------------------------- deleting pods ----------------------------
+# Force kill pod
+# krmf() {
+#     POD=$(kgpo | grep ${1} | awk '{print $1}')
+#     krmpo $POD -f --grace-period=0 --force
+# }
+
+
+# Deleting all pods from namespace 
+# krmall() {
+#     echo "Deleting all pods in namespace ${1}"
+#     kubectl delete --all pods --namespace="$1"
+# }
+krmall() {
+    kubectl delete --all pods
+}
+
+# force delete all pods in namespace
+kforce() {
+    kgpo -n | awk '{print $1}' | xargs kubectl delete pod --grace-period=0 --force
+    # below takes an argument of a namespace - depricated in favour of kubens
+    # kgpo -n ${1} | awk '{print $1}' | xargs kubectl delete pod --grace-period=0 --force --namespace ${1}
+}
+
+
+
+#---------------------------- deleting errors ----------------------------
+
+# delete all evicted pods from all namespaces
+krmevict() {
+    kubectl get pods --all-namespaces | grep Evicted | awk '{print $2 " --namespace=" $1}' | xargs kubectl delete pod
+}
+
+# delete all containers in ImagePullBackOff state from all namespaces
+krmbackoff() {
+    kubectl get pods --all-namespaces | grep 'ImagePullBackOff' | awk '{print $2 " --namespace=" $1}' | xargs kubectl delete pod
+}
+
+
+# # delete all containers in ImagePullBackOff or ErrImagePull or Evicted state from namespace in argument
+# krmallerror() {
+#     kgpo -n ${1}  | grep -E 'ImagePullBackOff|ErrImagePull|Evicted' | awk '{print $2 " --namespace=" $1}' | xargs kubectl delete pod
+# }
+
+krmallerror() {
+    kgpo -n ${1}  | grep -E -i 'ImagePullBackOff|ErrImagePull|Evicted'  | awk '{print $1}' | xargs kubectl delete pod
+}
+
+
+#---------------------------- scaling ----------------------------
+
+# scale all deployments in namespace to 0 - One argument 1) namespace
+kdropall() {
+    kgdep -n ${1} | awk '{print $1}'| xargs kubectl scale deploy -n ${1} --replicas=0
+}
+
+# scale all deployments in namespace to 1 - One argument 1) namespace
+kupall() {
+    kgdep -n ${1} | awk '{print $1}'| xargs kubectl scale deploy -n ${1} --replicas=1
+}
+# remove first row: kgdep -n ${1} | sed -n '1!p' | awk '{print $1}'
+
+# Scale single deployment to 0 - Two arguments 1) namespace 2) deployment name
+kdrop() {
+    kgdep -n ${1} | grep ${2}| awk '{print $1}'| xargs kubectl scale deploy -n ${1} --replicas=0
+}
+
+# Scale single deployment to 1 - Two arguments 1) namespace 2) deployment name
+kup() {
+    kgdep -n ${1} | grep ${2}| awk '{print $1}'| xargs kubectl scale deploy -n ${1} --replicas=1
+}
+
+
+
+#---------------------------- TBC ----------------------------
+
+# Get ImageID from pod - Two arguments 1) namespace 2) podname
+# this gets a hash
+kgimgid() {
+    POD=$(kgpo -n ${1} | grep ${2} | awk '{print $1}')
+    kgpoo $POD -n ${1} | grep imageID
+}
+
+# kube get docker tag - 1 argument 1) pod name
+kgdt() {
+    kgpo | grep ${1} | awk '{print $1}' | xargs kubectl get pods -o json | jq .spec.containers[].image
+}
+# remove namespace from kgpoo line
+
+# tail logs of container
+kflo() {
+    POD=$(kgpo | grep ${1} | awk '{print $1}')
+    klo -f $POD -c $2
+}

@@ -1,0 +1,8 @@
+spechelp() {
+    echo "------ special alias help ------"
+    echo "netkill ------ Restart NetworkManager and Strongswan"
+}
+
+
+# Restart network manager and strongswan
+alias netkill="echo 'restarting NetworkManager..\n' && sudo systemctl restart NetworkManager && echo 'restarting Strongswan ..' && sudo systemctl restart strongswan"

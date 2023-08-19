@@ -1,0 +1,71 @@
+#======================================
+#####--------- terraform ---------#####
+#======================================
+
+terrahelp() {
+    echo
+    echo "Note: assumes there is a terraform/ dir. eg. 'terraform/terraform.tfstate'"
+    echo
+    echo "------ General ------"
+    echo "tf            terraform"
+    echo "tsl           terraform state list when the file is in terraform/terraform.tfstate"
+    echo
+    echo "------ terra workflow ------"
+    echo "tfin          terraform init"
+    echo "tfinup        terraform init -upgrade"
+    echo "tfpl          terraform plan"
+    echo "tfap          terraform apply -auto-approve"
+    echo "tfrm          terraform destroy -auto-approve"
+    echo
+    echo "------Terra next gen ------"
+    echo "tfapdc        terraform apply and write output to file 'terraform_apply.log'"
+    echo "tfpro"        
+    echo "tfpro         List all providers in the current Terraform configuration"
+}
+
+#------General terra workflow ------
+alias tf="terraform"
+alias tsl="terraform state list -state=terraform/terraform.tfstate"
+# alias tso="terraform state show -state=terraform/terraform.tfstate"
+
+
+
+# these functions could be written as alias's
+#   eg: alias tfpl="TFVAR=-var-file=../terraform.tfvars && terraform -chdir=./terraform plan $TFVAR"
+tfin() {
+    TFVAR=-var-file=../terraform.tfvars
+    echo "TFVAR: $TFVAR"
+    terraform -chdir=./terraform init
+}
+tfinup() {
+    TFVAR=-var-file=../terraform.tfvars
+    echo "TFVAR: $TFVAR"
+    terraform -chdir=./terraform init -upgrade
+}
+tfpl() {
+    TFVAR=-var-file=../terraform.tfvars
+    echo "TFVAR: $TFVAR"
+    terraform -chdir=./terraform plan $TFVAR
+}
+tfap() {
+    TFVAR=-var-file=../terraform.tfvars
+    echo "TFVAR: $TFVAR"
+    terraform -chdir=./terraform apply $TFVAR -auto-approve
+}
+# tfapdebug() {
+#     TFVAR=-var-file=../terraform.tfvars
+#     echo "TFVAR: $TFVAR"
+#     terraform -chdir=./terraform apply $TFVAR -auto-approve -debug
+# }
+tfrm() {
+    TFVAR=-var-file=../terraform.tfvars
+    echo "TFVAR: $TFVAR"
+    terraform -chdir=./terraform destroy $TFVAR -auto-approve
+}
+
+#------Terra next gen ------
+# terraform apply and write output to file 'terraform_apply.log'
+alias tfapdc="nohup terraform apply -auto-approve > terraform_apply.log &"
+
+# List all providers in the current Terraform configuration
+alias tfpro="terraform -chdir=./terraform providers"

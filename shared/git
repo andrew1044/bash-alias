@@ -1,0 +1,49 @@
+#-------------------------------------------------------------
+# Git Alias Commands
+#-------------------------------------------------------------
+
+githelp() {
+    echo "g ------- git"
+    echo "gss ----- git status"
+    echo "gp ------ git pull"
+    echo "gcm ----- git commit message in first argument, use single quotations"
+    echo "gu ------ git stage modified files"
+    echo "gpu ----- git push"
+    echo "gch ----- git checkout branch in first argument, use single quotations"
+    echo "gba ----- git list local and remote branches"
+    echo "gbr ----- git list remote branches"
+    echo "gbr ----- git show current branch"
+    echo "gb ------ git branch"
+    echo "gig ----- add argument to .gitignore file"
+    echo "mgd ----- git merge and delete branch"
+}
+
+
+alias g='git'
+alias gss='git status'
+alias gp='git pull'
+alias gpu='git push'
+alias gu='git add --update'
+alias gba='git branch -a'
+alias gbr='git branch -r'
+alias gsb='git show-branch'
+alias gb='git branch'
+
+# git checkout 
+gch() {
+    git checkout "$1"
+}
+
+# git commit message in first args
+# gcm() {
+#     git commit --message "$1"
+# }
+
+# add to git ignore
+gig() {
+    echo "$1" >> .gitignore
+}
+
+mgd() {
+    git merge "$1" && git branch -d "$1"
+}

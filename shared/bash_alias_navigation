@@ -1,0 +1,85 @@
+navhelp() {
+    echo "------ navigation ------"
+    echo "..            cd .."
+    echo "...           cd ../.."
+    echo "....          cd ../../.."
+    echo ".....         cd ../../../.."
+    echo "cl            clear"
+    echo
+    echo "------ fedora WS important dirs ------"
+    echo "balias        bash alias dir"
+    echo "charts        ap1 helm charts dir"
+    echo "imgs          ap1 docker dir"
+    echo "apgh          ap1 github dir"
+    echo 
+    echo "------ Programs ------"
+    echo "r / ra ------ ranger"
+    echo "d ----------- docker"
+    echo "na ---------- open nautilus in current dir"
+    echo "co ---------- open in VS code in current dir"
+    echo "awsws ------- AWS workspace flatpak"
+    echo "notes -------- Obsidian notes flatpak"
+    echo 
+
+}
+
+
+#=================================================#
+##########---------- nav help  ----------##########
+#=================================================#
+#---------- General ----------#
+
+alias ll="ls -lrt"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias cl="clear # Clears the terminal screen"
+
+
+#-------- aws dev box -------#
+alias ggit="cd /c/Users/andrew/Documents/GitHub"
+alias bbalias="cd /c/Users/andrew/Documents/k3-GitHub/bash-alias"
+alias ccharts="cd /c/Users/andrew/Documents/GitHub/infrastructure/kube/charts"
+alias iimgs="cd /c/Users/andrew/Documents/GitHub/infrastructure/images"
+
+
+#-------- fedora WS -------#
+# Bash Alias;s (here)
+alias balias="cd /mnt/work_data/gh/aa/bash-alias"
+
+# AP1
+alias infra="cd /mnt/work_data/ap1/github/aem-ap1-infrastructure"
+alias charts="cd /mnt/work_data/ap1/github/aem-ap1-infrastructure/kube/charts"
+alias imgs="cd /mnt/work_data/ap1/github/aem-ap1-infrastructure/images"
+alias apgh="cd /mnt/work_data/ap1/github"
+alias appr="cd /mnt/work_data/ap1/projects"
+
+
+#=================================================#
+##########------ Program shortcuts ------##########
+#=================================================#
+# ranger
+alias r=". ranger"
+alias ra="ranger"
+
+# docker
+alias d='docker'
+
+# NeoVim
+alias v='nvim'
+
+# Nautilus
+alias na="nautilus . &"
+
+# VS code here
+alias co="code ."
+
+# Obsidian Notes 
+alias notes="flatpak run md.obsidian.Obsidian </dev/null &>/dev/null &"
+
+# AWS workspace
+alias awsws="flatpak run com.amazon.Workspaces </dev/null &>/dev/null &"
+
+# Teams
+alias teams="flatpak run --socket=wayland org.chromium.Chromium --app=https://teams.microsoft.com/"

@@ -1,0 +1,125 @@
+
+
+function sbash() {
+  case "$(ps -p $$ -o comm=)" in
+    *bash*)
+      source ~/.bashrc
+      ;;
+    *zsh*)
+      source ~/.zshrc
+      ;;
+    *)
+      echo "Unsupported shell"
+      ;;
+  esac
+}
+
+alias testbruh="echo working"
+
+
+helps() {
+    echo "------ helps ------"
+    echo "ap1help ------ ap1"
+    echo "helpme ------- namarag win help"
+    echo "genhelp ------ general help"
+    echo "ahelp -------- alias help"
+    echo "githelp ------ git help"
+    echo "khelp -------- kubectl help help"
+    echo "navhelp ------ navigation help"
+    echo "spechelp ----- special help"
+}
+
+genhelp() {
+
+}
+
+
+ahelp() {
+    echo "------ general alias help ------"
+    echo "sbash --------- sources .zshrc file"
+    echo "fbkup --------- select filename and create backup   -- Argument: <name_of_file>"
+    echo "bat ----------- Show current battery"
+}
+
+
+
+#=================================================#
+##########-------- Linux-y Stuff --------##########
+#=================================================#
+
+findbig() {
+    sudo du -a $1 | sort -n -r | head -n 10
+}
+
+bencode() {
+    #do things with parameters like $1 such as
+    echo "$1" | base64
+}
+
+bdecode() {
+    echo "$1" | base64 --decode
+}
+
+update () {
+    if type pacman >/dev/null 2>&1; then
+        echo "pacman is installed"
+        sudo pacman -Syu -y
+    elif type dnf >/dev/null 2>&1; then
+        echo "dnf is installed..."
+        echo "============================="
+        echo "-------- dnf updates --------"
+        echo "============================="
+        sudo dnf update --refresh
+    else
+        echo "update command not set - no available package manager"
+    fi
+    echo "============================="
+    echo "------ flatpak updates ------"
+    echo "============================="
+    flatpak update -y
+}
+
+
+# file back-up "file.txt"
+fbkup() {
+    # Check args
+    NAME="$1"
+    DEL="$2"
+    [[ -z "$NAME" ]] && (echo -e "ERROR: Please set a file" && exit 22)
+
+    # get todays date, vars for file name and extension
+    DATE_NOW=$(date +"%Y_%m_%d")
+    FILE_NAME="${NAME%%.*}"
+    FILE_EXT="${NAME#*.}"
+
+    # cp
+    cp -i "$NAME" "$FILE_NAME-backup-$DATE_NOW.$FILE_EXT"
+    if [[ "$DEL" == "del" ]]; then
+        rm "$NAME"
+    fi
+    # rm $NAME
+}
+
+# Show open ports
+alias ports='sudo netstat -tulanp'
+
+
+# Battery 
+alias bat='upower -i $(upower -e | grep "BAT") | grep -E "state|to full|percentage"'
+
+
+
+#=================================================#
+##########------------- KDE -------------##########
+#=================================================#
+# Force restart kde
+alias krestart="kquitapp5 plasmashell && kstart5 plasmashell  > /dev/null 2>&1 & disown"
+
+
+
+
+
+#=================================================#
+##########------------ other ------------##########
+#=================================================#
+alias cleanimg='docker rmi -f $(docker images -q -f "dangling=true")'
