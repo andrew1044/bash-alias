@@ -8,9 +8,9 @@ navhelp() {
     echo
     echo "------ fedora WS important dirs ------"
     echo "balias        bash alias dir"
-    echo "charts        ap1 helm charts dir"
-    echo "imgs          ap1 docker dir"
-    echo "apgh          ap1 github dir"
+    echo "gh            local github dir"
+    echo "aa            local aa github dir"
+    echo "kestra        local kestra github "
     echo 
     echo "------ Programs ------"
     echo "r / ra ------ ranger"
@@ -20,9 +20,10 @@ navhelp() {
     echo "awsws ------- AWS workspace flatpak"
     echo "notes -------- Obsidian notes flatpak"
     echo 
-
 }
-
+alias gh="cd /mnt/work/gh"
+alias aa="cd /mnt/work/gh/aa"
+alias kestra="cd /mnt/work/gh/aa/kestra"
 
 #=================================================#
 ##########---------- nav help  ----------##########
@@ -46,14 +47,12 @@ alias iimgs="cd /c/Users/andrew/Documents/GitHub/infrastructure/images"
 
 #-------- fedora WS -------#
 # Bash Alias;s (here)
-alias balias="cd /mnt/work_data/gh/aa/bash-alias"
+alias balias="cd /mnt/work/gh/aa/bash-alias"
 
-# AP1
-alias infra="cd /mnt/work_data/ap1/github/aem-ap1-infrastructure"
-alias charts="cd /mnt/work_data/ap1/github/aem-ap1-infrastructure/kube/charts"
-alias imgs="cd /mnt/work_data/ap1/github/aem-ap1-infrastructure/images"
-alias apgh="cd /mnt/work_data/ap1/github"
-alias appr="cd /mnt/work_data/ap1/projects"
+# work dirs
+alias gh="cd /mnt/work/gh"
+alias aa="cd /mnt/work/gh/aa"
+alias kestra="cd /mnt/work/gh/kestra"
 
 
 #=================================================#

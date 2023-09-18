@@ -20,7 +20,7 @@ krmall-re() {
     
     echo
     echo "Deleting all other search pods ..."
-    kubectl get pods --namespace "$1" | awk -F ' ' '{print $1}' | grep 'api\|ner\|kibana' | xargs kubectl delete pod
+    kubectl get pods --namespace "$1" | awk '{print $1}' | grep 'api\|ner\|kibana' | xargs kubectl delete pod
 }
 
 # Deleting all ES then re-delete
@@ -28,7 +28,7 @@ krmsearch() {
     echo "Deleting all k3 Search pods in namespace ${1} .... "
     echo
     echo "Deleting elasticsearch master ..."
-    kubectl get pods --namespace "$1" | awk -F ' ' '{print $1}' | grep 'master' | xargs kubectl delete pod
+    kubectl get pods --namespace "$1" | awk '{print $1}' | grep 'master' | xargs kubectl delete pod
 
     echo
     echo "sleeping 90 seconds ...."

@@ -1,0 +1,19 @@
+#=================================================#
+##########--------- docker help ---------##########
+#=================================================#
+
+dockerhelp() {
+    echo "------ general ------"
+    echo "d ------------ docker"
+    echo "dcu ---------- docker compose up"
+    echo "dcd ---------- docker compose down"
+    echo
+}
+
+alias d="docker"
+alias dcu="docker compose up"
+alias dcu="docker compose down"
+
+
+
+alias cleanimg='docker rmi -f $(docker images -q -f "dangling=true")'

@@ -9,7 +9,7 @@ Folders are for different environments. The shared folder containes all the usef
 
 ## Sourcing files
 
-Add the following to zshrc
+Add the following to `.bashrc`/`.zshrc`
 
 ### Individual file
 
@@ -19,21 +19,28 @@ Add the following to zshrc
 
 ### Directory
 
-Recursive sourcing of files in a directory...
+Recursive sourcing multiple files in multiple directories
 
 ``` bash
-ALIAS_DIR=/path/to/dir
-if [ -d "$ALIAS_DIR" ];
-then
-    for file in $ALIAS_DIR/* ; do
-      if [ -f "$file" ] ; then
-        # echo "sourcing $file"
+# Define array of directory paths
+ALIAS_DIRS=(
+    /path/to/dir1
+    /path/to/dir2
+    /path/to/dir3
+)
+
+for ALIAS_DIR in "${ALIAS_DIRS[@]}"; do
+  if [ -d "$ALIAS_DIR" ]; then
+    for file in "$ALIAS_DIR"/*; do
+      if [ -f "$file" ]; then
+        # echo "sourcing $file" # testing
         . "$file"
       fi
     done
-else
+  else
     echo "$ALIAS_DIR directory does not exist..."
-fi
+  fi
+done
 ```
 
 ## SSH public key not working

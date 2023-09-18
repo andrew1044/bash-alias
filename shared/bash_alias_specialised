@@ -1,8 +1,29 @@
 spechelp() {
     echo "------ special alias help ------"
     echo "netkill ------ Restart NetworkManager and Strongswan"
+    echo "treehere ----- Run the tree command and format the output as a Markdown list  -- Argument: files to exclude 'here|and here'"
+    echo "codecount ---- Count the lines of code in a directory     -- Argument: file type to include"
 }
 
 
 # Restart network manager and strongswan
 alias netkill="echo 'restarting NetworkManager..\n' && sudo systemctl restart NetworkManager && echo 'restarting Strongswan ..' && sudo systemctl restart strongswan"
+
+
+# Run the tree command and format the output as a Markdown list  -- Argument: files to exclude 'here|and here'
+function treehere() {
+    # Run the tree command and format the output as a Markdown list
+    tree=$(tree -tf --noreport -I "*~|"${1}"" --charset ascii . |
+           sed -e 's/| \+/  /g' -e 's/[|`]-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](\2):g')
+
+    # Print the Markdown-formatted tree
+    printf "<!-- markdownlint-disable MD001 MD007 -->\n\n# Project tree\n\n\`\`\` bash\ntreehere \"$1\"\n\`\`\`\n\n${tree}" > tree.md
+}
+
+function codecount() {
+    # Count the lines of code in a directory
+    find . -name "*.${1}" -type f -exec cat {} + | wc -l
+    # codecount java html
+    # find . -type f \( -name "*.${1}" $(printf -- '-o -name "*.%s" ' "${@:2}") \) -exec cat {} + | wc -l
+    
+}
