@@ -1,0 +1,6 @@
+mvnhelp() {
+    echo "------ Maven ------"
+    echo "mst ---------- mvn clean install -Dmaven.test.skip=true --> skip compiling tests" 
+}
+
+alias mst='mvn clean install -Dmaven.test.skip=true'

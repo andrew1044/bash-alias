@@ -12,7 +12,9 @@ dockerhelp() {
 
 alias d="docker"
 alias dcu="docker compose up"
-alias dcu="docker compose down"
+alias dcd="docker compose down"
+
+alias devup="cd /mnt/work/gh/aa/devcontainer-templates/kestra && docker-compose -f docker-compose.yaml up"
 
 
 

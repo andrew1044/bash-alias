@@ -18,12 +18,19 @@ navhelp() {
     echo "na ---------- open nautilus in current dir"
     echo "co ---------- open in VS code in current dir"
     echo "awsws ------- AWS workspace flatpak"
-    echo "notes -------- Obsidian notes flatpak"
-    echo 
+    echo "notes ------- Obsidian notes flatpak"
+    echo
+    echo "------ Work ------"
+    echo "gh ---------- Github main dir"
+    echo "aa ---------- aa Github dir"
+    echo "kestra ------ kestra work dir"
+    echo "kgh --------- kestra Github dir"
 }
-alias gh="cd /mnt/work/gh"
-alias aa="cd /mnt/work/gh/aa"
-alias kestra="cd /mnt/work/gh/aa/kestra"
+
+alias gh='cd /mnt/work/gh'
+alias aa='cd /mnt/work/gh/aa'
+alias kgh='cd /mnt/work/gh/aa/kestra'
+alias kestra='cd /mnt/work/kestra'
 
 #=================================================#
 ##########---------- nav help  ----------##########

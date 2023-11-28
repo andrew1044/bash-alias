@@ -1,0 +1,9 @@
+stockshelp() {
+    echo "------ stocks alias help ------"
+    echo "ticker ------- Edit the ticker config file"
+    echo "stocks ------- Run stock ticker"
+}
+
+
+alias ticker='nvim /home/andy/Documents/life/cashflow/stocks/ticker.yaml'
+alias stocks='docker run -it --rm -v /home/andy/Documents/life/cashflow/stocks/ticker.yaml:/.ticker.yaml  achannarasappa/ticker'

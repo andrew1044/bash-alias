@@ -27,6 +27,8 @@ helps() {
     echo "khelp -------- kubectl help help"
     echo "navhelp ------ navigation help"
     echo "spechelp ----- special help"
+    echo "stockshelp --- stocks help"
+    echo "mvnhelp ------ maven help"
 }
 
 genhelp() {
@@ -35,14 +37,13 @@ genhelp() {
     echo "devup -------- "
 }    
 
-alias devup="cd /mnt/work/gh/aa/devcontainer-templates/kestra && docker-compose -f docker-compose.yaml up"
 
 
 
 ahelp() {
     echo "------ general alias help ------"
     echo "sbash --------- sources .zshrc file"
-    echo "fbkup --------- select filename and create backup   -- Argument: <name_of_file>"
+    echo "fbkup --------- file backup: select filename and create backup   -- Argument: <name_of_file>"
     echo "bat ----------- Show current battery"
 }
 

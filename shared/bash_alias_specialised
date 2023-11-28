@@ -3,6 +3,9 @@ spechelp() {
     echo "netkill ------ Restart NetworkManager and Strongswan"
     echo "treehere ----- Run the tree command and format the output as a Markdown list  -- Argument: files to exclude 'here|and here'"
     echo "codecount ---- Count the lines of code in a directory     -- Argument: file type to include"
+    echo "pls ---------- sudo"
+    echo "shit --------- run previous command as sudo"
+    echo "dotties ------ git alias for adding files to my dotties repository"
 }
 
 
@@ -27,3 +30,22 @@ function codecount() {
     # find . -type f \( -name "*.${1}" $(printf -- '-o -name "*.%s" ' "${@:2}") \) -exec cat {} + | wc -l
     
 }
+
+
+alias shit='sudo $(history -p \!\!)'
+alias pls='sudo'
+
+
+# youtube downloader
+function ytdl() {
+    python3 -m pip install -U yt-dlp
+    yt-dlp  -P ~/Documents/ytdl/ "$1"
+}
+
+# update git config
+# dotties add nvim
+# dotties commit -m 'nvim dot files added'
+# dotties push -u origin main
+alias dotties='/usr/bin/git --git-dir=/mnt/work/gh/aa/dotties --work-tree=$HOME'
+
+
