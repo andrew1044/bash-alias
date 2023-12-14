@@ -6,6 +6,9 @@ spechelp() {
     echo "pls ---------- sudo"
     echo "shit --------- run previous command as sudo"
     echo "dotties ------ git alias for adding files to my dotties repository"
+    echo "audio -------- restart pipewire and pipewire-pulse"
+    echo "cpus --------- list processes using CPU"
+    echo "fzff --------- fzf with bat"
 }
 
 
@@ -48,4 +51,8 @@ function ytdl() {
 # dotties push -u origin main
 alias dotties='/usr/bin/git --git-dir=/mnt/work/gh/aa/dotties --work-tree=$HOME'
 
+alias audio='systemctl --user restart pipewire pipewire-pulse'
 
+alias cpus='ps -eo pcpu,pid,user,args | tail -n +2 | sort -k1 -r -n | head -10'
+
+alias fzff="fzf --preview 'bat --color=always {}' --preview-window '~3'"

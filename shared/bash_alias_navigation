@@ -54,7 +54,7 @@ alias iimgs="cd /c/Users/andrew/Documents/GitHub/infrastructure/images"
 
 #-------- fedora WS -------#
 # Bash Alias;s (here)
-alias balias="cd /mnt/work/gh/aa/bash-alias"
+alias balias="code /mnt/work/gh/aa/bash-alias"
 
 # work dirs
 alias gh="cd /mnt/work/gh"
@@ -89,3 +89,6 @@ alias awsws="flatpak run com.amazon.Workspaces </dev/null &>/dev/null &"
 
 # Teams
 alias teams="flatpak run --socket=wayland org.chromium.Chromium --app=https://teams.microsoft.com/"
+
+# hyprland conf
+alias hypr='cd ~/.config/hypr && nvim .'

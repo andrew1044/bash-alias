@@ -44,7 +44,7 @@ ahelp() {
     echo "------ general alias help ------"
     echo "sbash --------- sources .zshrc file"
     echo "fbkup --------- file backup: select filename and create backup   -- Argument: <name_of_file>"
-    echo "bat ----------- Show current battery"
+    echo "batt ---------- Show current battery"
 }
 
 
@@ -111,7 +111,7 @@ alias ports='sudo netstat -tulanp'
 
 
 # Battery 
-alias bat='upower -i $(upower -e | grep "BAT") | grep -E "state|to full|percentage"'
+alias batt='upower -i $(upower -e | grep "BAT") | grep -E "state|to full|percentage"'
 
 
 
