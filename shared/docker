@@ -19,3 +19,5 @@ alias devup="cd /mnt/work/gh/aa/devcontainer-templates/kestra && docker-compose 
 
 
 alias cleanimg='docker rmi -f $(docker images -q -f "dangling=true")'
+
+alias dstopall='docker stop $(docker ps -a -q)'

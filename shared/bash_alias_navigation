@@ -7,10 +7,11 @@ navhelp() {
     echo "cl            clear"
     echo
     echo "------ fedora WS important dirs ------"
-    echo "balias        bash alias dir"
+    echo "balias        Open bash alias in neovim"
     echo "gh            local github dir"
     echo "aa            local aa github dir"
-    echo "kestra        local kestra github "
+    echo "kestra        local kestra github"
+    echo "ppd --------- local outdexing github"
     echo 
     echo "------ Programs ------"
     echo "r / ra ------ ranger"
@@ -27,10 +28,6 @@ navhelp() {
     echo "kgh --------- kestra Github dir"
 }
 
-alias gh='cd /mnt/work/gh'
-alias aa='cd /mnt/work/gh/aa'
-alias kgh='cd /mnt/work/gh/aa/kestra'
-alias kestra='cd /mnt/work/kestra'
 
 #=================================================#
 ##########---------- nav help  ----------##########
@@ -42,7 +39,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias cl="clear # Clears the terminal screen"
+alias cl="clear"
 
 
 #-------- aws dev box -------#
@@ -53,13 +50,15 @@ alias iimgs="cd /c/Users/andrew/Documents/GitHub/infrastructure/images"
 
 
 #-------- fedora WS -------#
-# Bash Alias;s (here)
-alias balias="code /mnt/work/gh/aa/bash-alias"
+# Bash Alias's (here)
+alias balias="cd /mnt/work/gh/aa/bash-alias && nvim ."
 
 # work dirs
-alias gh="cd /mnt/work/gh"
-alias aa="cd /mnt/work/gh/aa"
-alias kestra="cd /mnt/work/gh/kestra"
+alias gh="cd "${WERK}"/gh"
+alias aa="cd "${WERK}"/gh/aa"
+alias kes="cd "${WERK}"gh/kestra"
+alias cash='cd "${WERK}"/gh/aa/cashflo'
+alias ppd='cd "${WERK}"/gh/outdexing'
 
 
 #=================================================#
@@ -74,6 +73,7 @@ alias d='docker'
 
 # NeoVim
 alias v='nvim'
+alias vv='nvim .'
 
 # Nautilus
 alias na="nautilus . &"
