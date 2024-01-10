@@ -16,8 +16,10 @@ khelp() {
     echo "------ scaling ------"
     echo "kdropall      Scale all deployments in namespace to -0-       -- Argument: <namespace>"
     echo "kupall        Scale all deployments in namespace to -1-       -- Argument: <namespace>"
-    echo "kdrop         Scale single app to -0-                         -- Arguments: <namespace> <deployment_name>"
-    echo "kup           Scale single app to -1-                         -- Arguments: <namespace> <deployment_name>"
+    echo
+    echo "-->> NOTE <<-- set kx and kn before using kdrop and kup"
+    echo "kdrop         Scale single app to -0-                         -- Arguments: <deployment_name>"
+    echo "kup           Scale single app to -1-                         -- Arguments: <deployment_name>"
     echo 
     echo "kgevt --------- Kube in order of time "
     echo "------ TBC ------"
@@ -202,14 +204,14 @@ kupall() {
 }
 # remove first row: kgdep -n ${1} | sed -n '1!p' | awk '{print $1}'
 
-# Scale single deployment to 0 - Two arguments 1) namespace 2) deployment name
+# Scale single deployment to 0 - Two arguments 1) deployment name
 kdrop() {
-    kgdep -n ${1} | grep ${2}| awk '{print $1}'| xargs kubectl scale deploy -n ${1} --replicas=0
+    kgdep | grep ${1}| awk '{print $1}'| xargs kubectl scale deploy --replicas=0
 }
 
-# Scale single deployment to 1 - Two arguments 1) namespace 2) deployment name
+# Scale single deployment to 1 - Two arguments 1) deployment name
 kup() {
-    kgdep -n ${1} | grep ${2}| awk '{print $1}'| xargs kubectl scale deploy -n ${1} --replicas=1
+    kgdep | grep ${1}| awk '{print $1}'| xargs kubectl scale deploy --replicas=1
 }
 
 
