@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 stockshelp() {
     echo "------ stocks alias help ------"
     echo "ticker ------- Edit the ticker config file"

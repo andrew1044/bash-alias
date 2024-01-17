@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 spechelp() {
     echo "------ special alias help ------"
     echo "netkill ------ Restart NetworkManager and Strongswan"
@@ -31,7 +33,6 @@ function codecount() {
     find . -name "*.${1}" -type f -exec cat {} + | wc -l
     # codecount java html
     # find . -type f \( -name "*.${1}" $(printf -- '-o -name "*.%s" ' "${@:2}") \) -exec cat {} + | wc -l
-    
 }
 
 
@@ -56,3 +57,8 @@ alias audio='systemctl --user restart pipewire pipewire-pulse'
 alias cpus='ps -eo pcpu,pid,user,args | tail -n +2 | sort -k1 -r -n | head -10'
 
 alias fzff="fzf --preview 'bat --color=always {}' --preview-window '~3'"
+
+# use fzf to find dirs only
+# TODO this is awesome but has output on shell startup
+#alias fzfdir="cd $(find . -type d -print | fzf)"
+#

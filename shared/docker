@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 #=================================================#
 ##########--------- docker help ---------##########
 #=================================================#
@@ -11,13 +13,17 @@ dockerhelp() {
 }
 
 alias d="docker"
-alias dcu="docker compose up"
-alias dcd="docker compose down"
+alias dcu="d compose up"
+alias dcd="d compose down"
 
 alias devup="cd /mnt/work/gh/aa/devcontainer-templates/kestra && docker-compose -f docker-compose.yaml up"
 
 
 
-alias cleanimg='docker rmi -f $(docker images -q -f "dangling=true")'
+alias cleanimg='d rmi -f $(d images -q -f "dangling=true")'
 
-alias dstopall='docker stop $(docker ps -a -q)'
+alias dstopall='d stop $(d ps -q)'
+
+
+# Some stuff that is useful for working with a single container
+alias dlo='d logs $(d ps -q)'

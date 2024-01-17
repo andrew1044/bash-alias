@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 navhelp() {
     echo "------ navigation ------"
     echo "..            cd .."
@@ -56,9 +58,9 @@ alias balias="cd /mnt/work/gh/aa/bash-alias && nvim ."
 # work dirs
 alias gh="cd "${WERK}"/gh"
 alias aa="cd "${WERK}"/gh/aa"
-alias kes="cd "${WERK}"gh/kestra"
-alias cash='cd "${WERK}"/gh/aa/cashflo'
-alias ppd='cd "${WERK}"/gh/outdexing'
+alias kes="cd "${WERK}"/gh/kestra"
+alias cash="cd "${WERK}"/gh/aa/cashflo"
+alias ppd="cd "${WERK}"/gh/outdexing"
 
 
 #=================================================#
