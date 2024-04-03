@@ -9,6 +9,15 @@ dockerhelp() {
     echo "d ------------ docker"
     echo "dcu ---------- docker compose up"
     echo "dcd ---------- docker compose down"
+    echo "devup -------- change directory and run docker-compose up in specific directory"
+    echo "cleanimg ----- remove all dangling docker images"
+    echo "dstopall ----- stop all running docker containers"
+    echo "dps ---------- list running docker containers"
+    echo "dn ----------- list docker networks"
+    echo "dex ---------- execute command in a running docker container"
+    echo "dflo --------- follow log output of a docker container"
+    echo "dlo ---------- show logs of the last started docker container"
+    echo "dsto --------- stop the last started docker container"
     echo
 }
 
@@ -24,6 +33,19 @@ alias cleanimg='d rmi -f $(d images -q -f "dangling=true")'
 
 alias dstopall='d stop $(d ps -q)'
 
+alias dps='d ps'
+alias dn='d network'
+dex() {
+    d exec -it $1 bash
+}
+dflo() {
+    d logs -f $1
+}
 
+dcub() {
+    docker-compose down --remove-orphans \
+    && docker-compose up --build
+}
 # Some stuff that is useful for working with a single container
 alias dlo='d logs $(d ps -q)'
+alias dsto='d stop $(d ps -q)'
