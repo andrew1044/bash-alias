@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-export WERK="/mnt/work"
-
 function sbash() {
   case "$(ps -p $$ -o comm=)" in
     *bash*)

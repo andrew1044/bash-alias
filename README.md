@@ -29,6 +29,7 @@ ALIAS_DIRS=(
     /path/to/dir3
 )
 
+export WERK="/mnt/work/"
 for ALIAS_DIR in "${ALIAS_DIRS[@]}"; do
   if [ -d "$ALIAS_DIR" ]; then
     for file in "$ALIAS_DIR"/*; do
