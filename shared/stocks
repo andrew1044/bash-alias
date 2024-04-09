@@ -7,5 +7,5 @@ stockshelp() {
 }
 
 
-alias ticker='nvim /home/andy/Documents/life/cashflow/stocks/ticker.yaml'
-alias stocks='docker run -it --rm -v /home/andy/Documents/life/cashflow/stocks/ticker.yaml:/.ticker.yaml  achannarasappa/ticker'
+alias ticker='nvim /mnt/work/gh/aa/stocks/ticker.yaml'
+alias stocks='docker run -it --rm -v /mnt/work/gh/aa/stocks/ticker.yaml:/.ticker.yaml  achannarasappa/ticker'

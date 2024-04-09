@@ -7,13 +7,21 @@ Folders are for different environments. The shared folder containes all the usef
 | shared  | all          | Shared alias's for all envs |
 | aws-ap1 | windows6 box | windows dev box alias       |
 
+## Cloning
+
+This is a bare repository, use the following command to clone as required
+
+```bash
+git clone --separate-git-dir=~/.myconf /path/to/repo ~
+```
+
 ## Sourcing files
 
 Add the following to `.bashrc`/`.zshrc`
 
 ### Individual file
 
-``` bash
+```bash
 [[ ! -f ~/path/to/file ]] || source ~/path/to/file
 ```
 
@@ -21,7 +29,7 @@ Add the following to `.bashrc`/`.zshrc`
 
 Recursive sourcing multiple files in multiple directories
 
-``` bash
+```bash
 # Define array of directory paths
 ALIAS_DIRS=(
     /path/to/dir1
@@ -48,12 +56,12 @@ done
 
 ensure ssh agent is working
 
-``` bash
+```bash
 eval `ssh-agent -s`
 ```
 
 add ssh key
 
-``` bash
+```bash
 ssh-add ~/.ssh/<ssh_key.key>
 ```
